@@ -13,7 +13,7 @@ class IrrationalNum:
 
 
     @singledispatchmethod
-    def __iadd__(self, other):
+    def __iadd__(self, other) -> "IrrationalNum":
         if not isinstance(other, self.__class__):
             raise SyntaxError(f"IrrationalNum don't sum with {type(other)}")
         
@@ -28,20 +28,20 @@ class IrrationalNum:
         return self
 
 
-    def __add__(self, other):
+    def __add__(self, other) -> "IrrationalNum":
         num = IrrationalNum(self.rational,self.irrational)
         num += other
         return num
     
 
     @singledispatchmethod
-    def __imul__(self, other):
+    def __imul__(self, other) -> "IrrationalNum":
         if not isinstance(other, self.__class__):
             raise SyntaxError(f"IrrationalNum don't multiplicate with {type(other)}")
         
         # (A+Bq)*(C+Dq) = ((A*C+5*B*D)+(B*C+A*D)*q)
-        self.rational = self.rational*other.rational + 5*self.irrational*other.irrational
-        self.irrational = self.irrational*other.rational + self.rational*other.irrational
+        self.rational, self.irrational = self.rational*other.rational + 5*self.irrational*other.irrational, \
+                                         self.irrational*other.rational + self.rational*other.irrational
         return self
     
 
@@ -52,25 +52,25 @@ class IrrationalNum:
         return self
     
 
-    def __mul__(self, other):
+    def __mul__(self, other) -> "IrrationalNum":
         num = IrrationalNum(self.rational, self.irrational)
         num *= other
         return num
     
 
-    def __isub__(self, other):
+    def __isub__(self, other) -> "IrrationalNum":
         self += other*-1
         return self
     
 
-    def __sub__(self, other):
+    def __sub__(self, other) -> "IrrationalNum":
         num = IrrationalNum(self.rational, self.irrational)
         num -= other
         return num
 
 
     def __str__(self):
-        return f'{self.rational}{'+' if self.irrational>=0 else ''}{self.irrational}√5'
+        return f"{self.rational}{'+' if self.irrational>=0 else ''}{self.irrational}√5"
 
 
 if __name__ == '__main__':
