@@ -75,6 +75,8 @@ class IrrationalNum:
 
 if __name__ == '__main__':
     num1 = IrrationalNum(1, 1)
+    num2 = IrrationalNum(1, 1)
+    print(num1*num2)
     print(num1)
     print(num1 + 1)
     print(num1 + num1)
